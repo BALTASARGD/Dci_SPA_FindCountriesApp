@@ -125,7 +125,7 @@ const CountryDetails: React.FC = () => {
     <div className="bg-blue-900 min-h-screen">
       <header
         id="country-header"
-        className="fixed top-0 left-0 h-screen flex flex-col items-center justify-center gap-4 p-5 bg-blue-900 text-white shadow-md z-50 w-64"
+        className="fixed top-0 left-0 h-screen flex flex-col items-center justify-center gap-4 p-5 bg-blue-900 text-white shadow-md z-50 w-64 lg:w-1/4 md:w-1/3 sm:w-1/2"
       >
         <div className="flex items-center justify-center w-full mb-10">
           <img
@@ -144,7 +144,7 @@ const CountryDetails: React.FC = () => {
       </header>
       <aside
         id="places-of-interest"
-        className="fixed top-0 right-0 h-screen flex flex-col items-center justify-between gap-4 p-5 bg-blue-900 text-white shadow-md z-50 w-64"
+        className="fixed top-0 right-0 h-screen flex flex-col items-center justify-between gap-4 p-5 bg-blue-900 text-white shadow-md z-50 w-64 lg:w-1/4 md:w-1/3 sm:w-1/2"
       >
         <div className="flex flex-col items-start gap-4 w-full">
           <div className="flex items-center justify-center w-full mb-10">
