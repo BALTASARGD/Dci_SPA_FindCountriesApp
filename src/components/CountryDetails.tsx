@@ -1,10 +1,11 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import * as L from "leaflet";
 import axios from "axios";
 import { getCountryDetails } from "../api";
 import { useLocation } from "react-router-dom";
 import "leaflet/dist/leaflet.css"; 
+import MapModal from "./MapModal";
+import HistoryModal from "./HistoryModal";
 const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
 interface Country {
@@ -27,6 +28,8 @@ const CountryDetails: React.FC = () => {
   const [images, setImages] = useState<any[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [places, setPlaces] = useState<any[]>([]);
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+  const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -76,21 +79,6 @@ const CountryDetails: React.FC = () => {
     setCountry(country);
     await loadCountryDescription(country.name);
 
-    const map = L.map("map").setView([country.latlng[0], country.latlng[1]], 5);
-
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
-      map
-    );
-
-    L.marker([country.latlng[0], country.latlng[1]])
-      .addTo(map)
-      .bindPopup(
-        `<b>${country.name}</b><br>${
-          country.capital ? country.capital : "No capital"
-        }`
-      )
-      .openPopup();
-
     loadPlacesOfInterest(country.name);
     loadCountryImages(country.name);
   };
@@ -108,13 +96,11 @@ const CountryDetails: React.FC = () => {
 
   const loadPlacesOfInterest = (countryName: string) => {
     const placesOfInterest = [
-      { type: "Accommodation", icon: "fas fa-hotel", query: "hotels" },
+      { type: "History", icon: "fas fa-book", query: "history" },
+      { type: "Map", icon: "fas fa-map", query: "map" },
+      { type: "Entertainment", icon: "fas fa-theater-masks", query: "entertainment" },
       { type: "Restaurants", icon: "fas fa-utensils", query: "restaurants" },
-      {
-        type: "Entertainment",
-        icon: "fas fa-theater-masks",
-        query: "entertainment",
-      },
+      { type: "Accommodation", icon: "fas fa-hotel", query: "hotels" },
     ];
 
     setPlaces(placesOfInterest);
@@ -158,24 +144,38 @@ const CountryDetails: React.FC = () => {
       </header>
       <aside
         id="places-of-interest"
-        className="fixed top-0 right-0 h-screen flex flex-col items-center justify-start gap-4 p-5 bg-green-900 text-white shadow-md z-50 w-64"
+        className="fixed top-0 right-0 h-screen flex flex-col items-center justify-between gap-4 p-5 bg-green-900 text-white shadow-md z-50 w-64"
       >
-        <div className="flex items-center justify-center w-full mb-10">
-          <h2 className="text-2xl text-white font-bold">Places of Interest</h2>
-        </div>
         <div className="flex flex-col items-start gap-4 w-full">
+          <div className="flex items-center justify-center w-full mb-10">
+            <h2 className="text-2xl text-white font-bold">Places of Interest</h2>
+          </div>
           {places.map((place) => (
             <a
               key={place.type}
-              href={`https://www.google.com/search?q=${place.query}+in+${country.name}`}
-              target="_blank"
+              href={place.query === "map" ? "#" : undefined}
+              target={place.query === "map" ? "_self" : "_blank"}
               className="flex items-center gap-2 text-white hover:text-gray-300 w-full p-2 rounded-md hover:bg-green-700"
+              onClick={
+                place.query === "map"
+                  ? () => setIsMapModalOpen(true)
+                  : place.query === "history"
+                  ? () => setIsHistoryModalOpen(true)
+                  : undefined
+              }
             >
               <i className={`${place.icon} text-2xl`}></i>
               <span>{place.type}</span>
             </a>
           ))}
         </div>
+        <a
+          href="/countries"
+          className="back-link inline-block mt-10 text-white hover:text-white -700"
+        >
+          <i className="fas fa-arrow-left text-2xl text-white mr-2"></i>
+          <span className="text-white">Back</span>
+        </a>
       </aside>
       <div
         id="country-container"
@@ -193,37 +193,9 @@ const CountryDetails: React.FC = () => {
             />
           )}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
-          <div>
-            <p
-              id="country-description"
-              className="mb-10 text-xl text-[#02048b]"
-            >
-              {description}
-            </p>
-            <p>
-              <strong>Population:</strong> {country.population.toLocaleString()}
-            </p>
-            <p>
-              <strong>Region:</strong> {country.region}
-            </p>
-            <p>
-              <strong>Subregion:</strong> {country.subregion}
-            </p>
-            <p>
-              <strong>Capital:</strong> {country.capital}
-            </p>
-          </div>
-          <div id="map" className="h-96 w-full"></div> {}
-        </div>
-        <a
-          href="/countries"
-          className="back-link inline-block mt-10 text-blue-500 hover:text-blue-700"
-        >
-          <i className="fas fa-arrow-left text-2xl mr-2"></i>
-          Back
-        </a>
       </div>
+      {isMapModalOpen && <MapModal latlng={country.latlng} onClose={() => setIsMapModalOpen(false)} />}
+      {isHistoryModalOpen && <HistoryModal description={description} onClose={() => setIsHistoryModalOpen(false)} />}
     </div>
   );
 };
