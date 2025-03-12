@@ -35,6 +35,9 @@ const CountryList: React.FC = () => {
     <div className="bg-blue-900 min-h-screen">
       <header className="top-0 left-0 w-full flex flex-col items-center justify-center gap-4 p-5 bg-blue-900 text-white shadow-md z-50 h-32 md:flex-row md:gap-10 md:p-10">
         <h1 className="text-4xl text-white font-bold md:text-6xl">{continent}</h1>
+        <button onClick={() => navigate("/")} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+          <i className="fas fa-home"></i> Home
+        </button>
       </header>
       <div id="countries-container" className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5">
         {countries.map((country) => (

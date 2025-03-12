@@ -2,7 +2,7 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCountryDetails } from "../api";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "leaflet/dist/leaflet.css"; 
 import MapModal from "./MapModal";
 import HistoryModal from "./HistoryModal";
@@ -31,6 +31,7 @@ const CountryDetails: React.FC = () => {
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadCountryDetails();
@@ -169,6 +170,9 @@ const CountryDetails: React.FC = () => {
             </a>
           ))}
         </div>
+        <button onClick={() => navigate("/countries", { state: { countries: location.state?.countries, searchTerm: location.state?.searchTerm, continent: location.state?.continent } })} className="mt-4 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-700">
+          <i className="fas fa-arrow-left"></i> Back to List
+        </button>
       </aside>
       <div
         id="country-container"
