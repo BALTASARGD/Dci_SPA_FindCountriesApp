@@ -20,6 +20,15 @@ This project is a Single Page Application (SPA) built with React, TypeScript, an
 - **REST Countries API**: An API to get information about countries.
 - **Unsplash API**: An API to get images from Unsplash.
 
+## Hooks
+
+This project makes extensive use of React hooks to manage state and side effects:
+
+- **useState**: Used to manage local state within components.
+- **useEffect**: Used to perform side effects such as fetching data from APIs.
+- **useNavigate**: Used to programmatically navigate between routes.
+- **useLocation**: Used to access the current location object, which contains information about the current URL.
+
 ## Getting Started
 
 To get started with the project, follow these steps:
