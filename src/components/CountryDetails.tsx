@@ -122,7 +122,7 @@ const CountryDetails: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="bg-green-900 min-h-screen">
       <header
         id="country-header"
         className="fixed top-0 left-0 h-screen flex flex-col items-center justify-center gap-4 p-5 bg-green-900 text-white shadow-md z-50 w-64"
