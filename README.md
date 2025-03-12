@@ -1,64 +1,81 @@
-# React + TypeScript + Vite
+# Find Your Country App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a Single Page Application (SPA) built with React, TypeScript, and Vite. The application allows users to search for countries, filter them by continent, and view detailed information about each country. The app uses the REST Countries API to fetch country data and the Unsplash API to fetch images.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Search Functionality**: Users can search for countries by name.
+- **Continent Filter**: Users can filter countries by continent.
+- **Country Details**: View detailed information about a country, including its flag, population, region, subregion, capital, and more.
+- **Map Modal**: View the location of the country on a map.
+- **History Modal**: View a brief history of the country.
+- **Responsive Design**: The application is responsive and works well on different screen sizes.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **Vite**: A build tool that aims to provide a faster and leaner development experience for modern web projects.
+- **Tailwind CSS**: A utility-first CSS framework for rapidly building custom user interfaces.
+- **REST Countries API**: An API to get information about countries.
+- **Unsplash API**: An API to get images from Unsplash.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+To get started with the project, follow these steps:
+
+1. **Clone the repository**:
+    ```sh
+    git clone https://github.com/your-github-username/FindYourCountryApp.git
+    cd FindYourCountryApp
+    ```
+
+2. **Install dependencies**:
+    ```sh
+    npm install
+    ```
+
+3. **Set up environment variables**:
+    Create a `.env` file in the root directory and add your Unsplash API key:
+    ```env
+    VITE_UNSPLASH_ACCESS_KEY=your_unsplash_api_key
+    ```
+
+4. **Run the development server**:
+    ```sh
+    npm run dev
+    ```
+
+5. **Build for production**:
+    ```sh
+    npm run build
+    ```
+
+## Project Structure
+
+The project structure is as follows:
+
+```
+/src
+  /components
+    - CountryDetails.tsx
+    - CountryList.tsx
+    - HistoryModal.tsx
+    - MapModal.tsx
+    - WelcomePage.tsx
+  /api.tsx
+  /main.tsx
+  /router.tsx
+  /style.css
+/.env
+/index.html
+/README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Contributing
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+If you would like to contribute to the project, please fork the repository and submit a pull request. We welcome all contributions!
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## License
 
-## Configuración del archivo .env
-
-Para configurar tu API key de Unsplash, crea un archivo `.env` en el directorio raíz del proyecto y agrega la siguiente línea:
-
-```env
-VITE_UNSPLASH_ACCESS_KEY=tu_api_key_aqui
-```
-
-Reemplaza `tu_api_key_aqui` con tu clave de acceso de Unsplash.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
