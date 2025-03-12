@@ -25,12 +25,20 @@ const CountryDetails: React.FC = () => {
   const [country, setCountry] = useState<Country | null>(null);
   const [description, setDescription] = useState("");
   const [images, setImages] = useState<any[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [places, setPlaces] = useState<any[]>([]);
   const location = useLocation();
 
   useEffect(() => {
     loadCountryDetails();
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [images]);
 
   const loadCountryDetails = async () => {
     const urlParams = new URLSearchParams(location.search);
@@ -131,26 +139,61 @@ const CountryDetails: React.FC = () => {
     <div>
       <header
         id="country-header"
-        className="top-0 left-0 w-full flex flex-col items-center justify-center gap-4 p-5 bg-gray-100 shadow-md z-50 h-64 md:flex-row md:gap-10 md:p-10"
+        className="fixed top-0 left-0 h-screen flex flex-col items-center justify-center gap-4 p-5 bg-green-900 text-white shadow-md z-50 w-64"
       >
-        <h1
-          id="country-name"
-          className="text-6xl text-blue-900 font-bold md:text-9xl"
-        >
-          {country.name}
-        </h1>
-        <img
-          id="country-flag"
-          src={country.flag} 
-          alt="Country Flag"
-          className="w-24 h-24 object-cover rounded-md md:w-48 md:h-48"
-        />
+        <div className="flex items-center justify-center w-full mb-10">
+          <img
+            id="country-flag"
+            src={country.flag} 
+            alt="Country Flag"
+            className="w-16 h-8 object-cover rounded-md"
+          />
+          <h1
+            id="country-name"
+            className="text-2xl text-white font-bold ml-4"
+          >
+            {country.name}
+          </h1>
+        </div>
       </header>
+      <aside
+        id="places-of-interest"
+        className="fixed top-0 right-0 h-screen flex flex-col items-center justify-start gap-4 p-5 bg-green-900 text-white shadow-md z-50 w-64"
+      >
+        <div className="flex items-center justify-center w-full mb-10">
+          <h2 className="text-2xl text-white font-bold">Places of Interest</h2>
+        </div>
+        <div className="flex flex-col items-start gap-4 w-full">
+          {places.map((place) => (
+            <a
+              key={place.type}
+              href={`https://www.google.com/search?q=${place.query}+in+${country.name}`}
+              target="_blank"
+              className="flex items-center gap-2 text-white hover:text-gray-300 w-full p-2 rounded-md hover:bg-green-700"
+            >
+              <i className={`${place.icon} text-2xl`}></i>
+              <span>{place.type}</span>
+            </a>
+          ))}
+        </div>
+      </aside>
       <div
         id="country-container"
         className="text-center p-5 bg-white shadow-md rounded-md mx-auto w-full mt-24 text-blue-900 max-w-6xl"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div
+          id="country-images"
+          className="w-full mt-12"
+        >
+          {images.length > 0 && (
+            <img
+              src={images[currentImageIndex].urls.regular}
+              alt={images[currentImageIndex].alt_description}
+              className="w-full h-auto rounded-md"
+            />
+          )}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
           <div>
             <p
               id="country-description"
@@ -172,44 +215,6 @@ const CountryDetails: React.FC = () => {
             </p>
           </div>
           <div id="map" className="h-96 w-full"></div> {}
-        </div>
-        <h2 className="text-4xl font-bold mt-24 text-[#02048b] md:text-6xl">
-          Country Images
-        </h2>
-        <div
-          id="country-images"
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-12"
-        >
-          {images.map((image) => (
-            <img
-              key={image.id}
-              src={image.urls.small}
-              alt={image.alt_description}
-              className="w-full h-auto rounded-md"
-            />
-          ))}
-        </div>
-        <h2 className="text-4xl font-bold mt-24 text-[#02048b] md:text-6xl">
-          Places of Interest
-        </h2>
-        <div
-          id="places-of-interest"
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-12"
-        >
-          {places.map((place) => (
-            <div
-              key={place.type}
-              className="place bg-gray-100 p-4 rounded-md shadow-md text-center"
-            >
-              <a
-                href={`https://www.google.com/search?q=${place.query}+in+${country.name}`}
-                target="_blank"
-              >
-                <i className={`${place.icon} text-4xl mb-2 text-blue-500`}></i>
-                <h3 className="text-lg font-bold mb-1">{place.type}</h3>
-              </a>
-            </div>
-          ))}
         </div>
         <a
           href="/countries"

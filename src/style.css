@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -144,6 +148,10 @@ footer .social-links a:hover {
   align-items: center;
   justify-content: center;
   font-size: 2.2em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  background-color: #1a202c;
+  color: #fff;
 }
 
 #country-header h1 {
@@ -157,6 +165,28 @@ footer .social-links a:hover {
   height: 120px;
   object-fit: cover;
   border-radius: 4px;
+}
+
+#country-header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#country-header a:hover {
+  background-color: #2d3748;
+  color: #cbd5e0;
+}
+
+#country-header i {
+  font-size: 1.5rem;
+}
+
+#country-header span {
+  font-size: 1rem;
+}
+
+#country-name {
+  transform: rotate(180deg);
 }
 
 #country-container {
@@ -191,7 +221,7 @@ footer .social-links a:hover {
   font-size: 1.5em;
 }
 
-.back-link:hover {
+back-link:hover {
   color: #0056b3;
 }
 
@@ -209,21 +239,10 @@ h2 {
 }
 
 #country-images {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-}
-
-#country-images img {
   width: 100%;
   height: auto;
   border-radius: 8px;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-#country-images img:hover {
-  transform: scale(2);
 }
 
 #places-of-interest .place {
