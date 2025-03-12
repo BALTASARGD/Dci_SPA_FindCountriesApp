@@ -7,6 +7,8 @@ const CountryList: React.FC = () => {
   const [countries, setCountries] = useState<any[]>([]);
   const location = useLocation();
   const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const continent = searchParams.get("continent") || "All Continents";
 
   useEffect(() => {
     if (location.state && location.state.countries) {
@@ -17,9 +19,7 @@ const CountryList: React.FC = () => {
   }, [location.state]);
 
   const fetchCountries = async () => {
-    const searchParams = new URLSearchParams(location.search);
     const searchTerm = searchParams.get("search") || "";
-    const continent = searchParams.get("continent") || "";
     const countries = await getCountries(continent);
     const filteredCountries = countries.filter((country) =>
       country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
@@ -34,7 +34,7 @@ const CountryList: React.FC = () => {
   return (
     <div className="bg-blue-900 min-h-screen">
       <header className="top-0 left-0 w-full flex flex-col items-center justify-center gap-4 p-5 bg-blue-900 text-white shadow-md z-50 h-32 md:flex-row md:gap-10 md:p-10">
-        <h1 className="text-4xl text-white font-bold md:text-6xl">🌍 Countries of the World</h1>
+        <h1 className="text-4xl text-white font-bold md:text-6xl">{continent}</h1>
       </header>
       <div id="countries-container" className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5">
         {countries.map((country) => (
