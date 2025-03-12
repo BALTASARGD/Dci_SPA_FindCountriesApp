@@ -52,3 +52,13 @@ export default tseslint.config({
   },
 })
 ```
+
+## Configuración del archivo .env
+
+Para configurar tu API key de Unsplash, crea un archivo `.env` en el directorio raíz del proyecto y agrega la siguiente línea:
+
+```env
+VITE_UNSPLASH_ACCESS_KEY=tu_api_key_aqui
+```
+
+Reemplaza `tu_api_key_aqui` con tu clave de acceso de Unsplash.
