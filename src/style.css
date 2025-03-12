@@ -64,7 +64,7 @@ header {
   padding: 0.5rem;
   border-radius: 8px;
   text-align: center;
-  background-color: #d4d1d1;
+  background-color: #8295ca;
   box-shadow: 0 8px 16px rgba(19, 10, 10, 0.2);
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -188,20 +188,26 @@ footer .social-links a:hover {
 #country-name {
   transform: rotate(180deg);
 }
-
+.text-blue-custom {
+  color: #02048b;
+}
 #country-container {
   text-align: center;
   padding: 20px;
   margin-top: 10px;
 }
-
+.text-blue-custom {
+  color: #02048b;
+}
 #country-description {
   margin-top: 50px;
   margin-bottom: 20px;
   text-decoration: #02048b;
   font-weight: bold;
 }
-
+.text-blue-custom {
+  color: #02048b;
+}
 #map {
   height: 400px;
   margin-top: 80px;
@@ -223,10 +229,12 @@ footer .social-links a:hover {
 
 back-link:hover {
   color: #0056b3;
+}.text-blue-custom {
+  color: #02048b;
 }
 
 #country-container {
-  color: #333;
+  color: #333333;
 }
 
 #country-description {

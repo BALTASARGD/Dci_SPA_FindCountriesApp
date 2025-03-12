@@ -122,10 +122,10 @@ const CountryDetails: React.FC = () => {
   }
 
   return (
-    <div className="bg-green-900 min-h-screen">
+    <div className="bg-blue-900 min-h-screen">
       <header
         id="country-header"
-        className="fixed top-0 left-0 h-screen flex flex-col items-center justify-center gap-4 p-5 bg-green-900 text-white shadow-md z-50 w-64"
+        className="fixed top-0 left-0 h-screen flex flex-col items-center justify-center gap-4 p-5 bg-blue-900 text-white shadow-md z-50 w-64"
       >
         <div className="flex items-center justify-center w-full mb-10">
           <img
@@ -144,7 +144,7 @@ const CountryDetails: React.FC = () => {
       </header>
       <aside
         id="places-of-interest"
-        className="fixed top-0 right-0 h-screen flex flex-col items-center justify-between gap-4 p-5 bg-green-900 text-white shadow-md z-50 w-64"
+        className="fixed top-0 right-0 h-screen flex flex-col items-center justify-between gap-4 p-5 bg-blue-900 text-white shadow-md z-50 w-64"
       >
         <div className="flex flex-col items-start gap-4 w-full">
           <div className="flex items-center justify-center w-full mb-10">
@@ -155,7 +155,7 @@ const CountryDetails: React.FC = () => {
               key={place.type}
               href={place.query === "map" ? "#" : undefined}
               target={place.query === "map" ? "_self" : "_blank"}
-              className="flex items-center gap-2 text-white hover:text-gray-300 w-full p-2 rounded-md hover:bg-green-700"
+              className="flex items-center gap-2 text-white hover:text-gray-300 w-full p-2 rounded-md hover:bg-blue-700"
               onClick={
                 place.query === "map"
                   ? () => setIsMapModalOpen(true)
