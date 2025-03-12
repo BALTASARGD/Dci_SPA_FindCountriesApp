@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCountries } from "../api";
 
@@ -7,14 +7,12 @@ const WelcomePage: React.FC = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [continent, setContinent] = useState("");
-  const [countries, setCountries] = useState<any[]>([]);
 
   const fetchCountries = async () => {
     const countries = await getCountries(continent);
     const filteredCountries = countries.filter((country) =>
       country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    setCountries(filteredCountries);
     navigate(`/countries?search=${searchTerm}&continent=${continent}`, { state: { countries: filteredCountries } });
   };
 

@@ -80,7 +80,8 @@ const CountryDetails: React.FC = () => {
     setCountry(country);
     await loadCountryDescription(country.name);
 
-    loadPlacesOfInterest(country.name);
+    loadPlacesOfInterest();
+
     loadCountryImages(country.name);
   };
 
@@ -95,7 +96,7 @@ const CountryDetails: React.FC = () => {
     }
   };
 
-  const loadPlacesOfInterest = (countryName: string) => {
+  const loadPlacesOfInterest = () => {
     const placesOfInterest = [
       { type: "History", icon: "fas fa-book", query: "history" },
       { type: "Map", icon: "fas fa-map", query: "map" },
