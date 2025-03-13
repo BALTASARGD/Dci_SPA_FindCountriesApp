@@ -79,9 +79,7 @@ const CountryDetails: React.FC = () => {
 
     setCountry(country);
     await loadCountryDescription(country.name);
-
     loadPlacesOfInterest();
-
     loadCountryImages(country.name);
   };
 
@@ -171,8 +169,8 @@ const CountryDetails: React.FC = () => {
             </a>
           ))}
         </div>
-        <button onClick={() => navigate("/countries", { state: { countries: location.state?.countries, searchTerm: location.state?.searchTerm, continent: location.state?.continent } })} className="mt-4 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-700">
-          <i className="fas fa-arrow-left"></i> Back to List
+        <button onClick={() => navigate("/")} className="mt-4 px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-700">
+          <i className="fas fa-arrow-left"></i> Back
         </button>
       </aside>
       <div
