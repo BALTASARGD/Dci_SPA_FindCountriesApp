@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "leaflet/dist/leaflet.css"; 
 import MapModal from "./MapModal";
 import HistoryModal from "./HistoryModal";
+import GalleryModal from "./GalleryModal";
 const UNSPLASH_ACCESS_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
 interface Country {
@@ -30,6 +31,7 @@ const CountryDetails: React.FC = () => {
   const [places, setPlaces] = useState<any[]>([]);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
+  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -101,6 +103,7 @@ const CountryDetails: React.FC = () => {
       { type: "Entertainment", icon: "fas fa-theater-masks", query: "entertainment" },
       { type: "Restaurants", icon: "fas fa-utensils", query: "restaurants" },
       { type: "Accommodation", icon: "fas fa-hotel", query: "hotels" },
+      { type: "Gallery", icon: "fas fa-images", query: "gallery" },
     ];
 
     setPlaces(placesOfInterest);
@@ -161,6 +164,8 @@ const CountryDetails: React.FC = () => {
                   ? () => setIsMapModalOpen(true)
                   : place.query === "history"
                   ? () => setIsHistoryModalOpen(true)
+                  : place.query === "gallery"
+                  ? () => setIsGalleryModalOpen(true)
                   : undefined
               }
             >
@@ -192,6 +197,7 @@ const CountryDetails: React.FC = () => {
       </div>
       {isMapModalOpen && <MapModal latlng={country.latlng} onClose={() => setIsMapModalOpen(false)} />}
       {isHistoryModalOpen && <HistoryModal description={description} onClose={() => setIsHistoryModalOpen(false)} />}
+      {isGalleryModalOpen && <GalleryModal images={images} onClose={() => setIsGalleryModalOpen(false)} />}
     </div>
   );
 };
