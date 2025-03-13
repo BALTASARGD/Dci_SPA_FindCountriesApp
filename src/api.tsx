@@ -34,7 +34,7 @@ export async function getCountryDetails(code: string) {
       capital: country.capital ? country.capital[0] : "N/A",
       population: country.population,
       area: country.area,
-      flag: country.flags.png, // Asegúrate de que la URL de la bandera esté correcta
+      flag: country.flags.png,
       currencies: country.currencies
         ? Object.values(country.currencies)
             .map((currency: any) => currency.name)
@@ -45,7 +45,7 @@ export async function getCountryDetails(code: string) {
         : "N/A",
       region: country.region,
       subregion: country.subregion,
-      latlng: country.latlng || [0, 0], // Ensure latlng is included
+      latlng: country.latlng || [0, 0],
     };
 
     return countryDetails;

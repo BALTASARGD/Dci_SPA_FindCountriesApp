@@ -14,23 +14,116 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* General Styles */
 body {
+  font-family: 'Arial', sans-serif;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 20px;
-  min-height: 100vh;
-  background-color: #f9f9f9;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Header Styles */
 header {
+  background-color: #1e3a8a; /* Tailwind bg-blue-900 */
+  color: white;
+  padding: 1rem;
   text-align: center;
-  padding: 20px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-  height: 32px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Country Card Styles */
+.country {
+  background-color: #1e40af; /* Tailwind bg-blue-700 */
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.country img {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.country h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.country p {
+  margin: 0.5rem 0;
+}
+
+.country button {
+  background-color: #3b82f6; /* Tailwind bg-blue-500 */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.country button:hover {
+  background-color: #2563eb; /* Tailwind hover:bg-blue-700 */
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 48rem;
+}
+
+.modal-content button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: #6b7280; /* Tailwind text-gray-500 */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.modal-content button:hover {
+  color: #374151; /* Tailwind hover:text-gray-700 */
+}
+
+/* Footer Styles */
+footer {
+  width: 100%;
+  margin-top: 2.5rem;
+  text-align: center;
+  padding: 1rem;
+  background-color: #f3f4f6; /* Tailwind bg-gray-200 */
+}
+
+footer p {
+  margin: 0;
+}
+
+footer .social-links a {
+  margin: 0 0.5rem;
+  color: #1e3a8a; /* Tailwind text-blue-900 */
+  transition: color 0.3s;
+}
+
+footer .social-links a:hover {
+  color: #2563eb; /* Tailwind hover:text-blue-700 */
 }
 
 #search,
@@ -59,29 +152,9 @@ header {
   }
 }
 
-.country {
-  border: 1px solid #ddd;
-  padding: 0.5rem;
-  border-radius: 8px;
-  text-align: center;
-  background-color: #8295ca;
-  box-shadow: 0 8px 16px rgba(19, 10, 10, 0.2);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
 .country:hover {
   transform: translateY(-5px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
-}
-
-.country img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  width: 150px;
-  height: 100px;
-  object-fit: cover;
-  margin: 0 auto;
 }
 
 button {
